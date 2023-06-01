@@ -10,25 +10,7 @@
 
 <style>   
 
-Body { function addTermsOfUseLink() {
-    // find the terms of use label element
-    var termsOfUseLabel = document.querySelector('#api label[for="termsOfUse"]');
-    if (!termsOfUseLabel) {
-        return;
-    }
-
-    // get the label text
-    var termsLabelText = termsOfUseLabel.innerHTML;
-
-    // create a new <a> element with the same inner text
-    var termsOfUseUrl = 'https://learn.microsoft.com/legal/termsofuse';
-    var termsOfUseLink = document.createElement('a');
-    termsOfUseLink.setAttribute('href', termsOfUseUrl);
-    termsOfUseLink.setAttribute('target', '_blank');
-    termsOfUseLink.appendChild(document.createTextNode(termsLabelText));
-
-    // replace the label text with the new element
-    termsOfUseLabel.replaceChild(termsOfUseLink, termsOfUseLabel.firstChild);
+Body { 
 }
 
   }
