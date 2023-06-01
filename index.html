@@ -10,48 +10,27 @@
 
 <style>   
 
-Body { 
-onLogin(): any {
-    var emailInput = (<HTMLInputElement>document.getElementById('emailInput')).value.trim();
-    var passInput = (<HTMLInputElement>document.getElementById('passInput')).value.trim();
-    var emailFormat = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
-  
-    if(!emailInput.match(emailFormat)){
-        alert("Please enter a valid email!");
+Body { function addTermsOfUseLink() {
+    // find the terms of use label element
+    var termsOfUseLabel = document.querySelector('#api label[for="termsOfUse"]');
+    if (!termsOfUseLabel) {
+        return;
     }
 
-    if(passInput ==''){
-      alert("Password field can not be empty!");
-    }
-     
+    // get the label text
+    var termsLabelText = termsOfUseLabel.innerHTML;
 
-    for (let i = 0; i < this.Student.length; i++) {
+    // create a new <a> element with the same inner text
+    var termsOfUseUrl = 'https://learn.microsoft.com/legal/termsofuse';
+    var termsOfUseLink = document.createElement('a');
+    termsOfUseLink.setAttribute('href', termsOfUseUrl);
+    termsOfUseLink.setAttribute('target', '_blank');
+    termsOfUseLink.appendChild(document.createTextNode(termsLabelText));
 
-      if (emailInput == this.Student[i].email) {
-        console.log('email success');
-        if (passInput == this.Student[i].password) {
-          console.log('pasword success');
-          //get the id
-          console.log(this.Student[i]._id);
-          this.studentId = this.Student[i]._id;
-          localStorage.setItem("studentId", this.Student[i]._id);
-          
-          this.ngZone.run(() => this.router.navigateByUrl('/course-list'))
-        } else if (emailInput == this.Student[i].email && passInput !== this.Student[i].password){
-          alert('Password is incorrect for this email!');
-          console.log('password fail');
-        }
-      } else if (emailInput !== this.Student[i].email && passInput == this.Student[i].password) {
-        alert("Email is incorrect for this password!");
-        console.log('email fail');
-      }
-      else if (emailInput !== this.Student[i].email && passInput !== this.Student[i].password) {
-        alert("Both password and email are incorrect!");
-      }
-      else{
-        console.log("successful login");
-      }
-    }
+    // replace the label text with the new element
+    termsOfUseLabel.replaceChild(termsOfUseLink, termsOfUseLabel.firstChild);
+}
+
   }
 
 
