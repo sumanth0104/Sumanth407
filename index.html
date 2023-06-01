@@ -10,47 +10,50 @@
 
 <style>   
 
-Body {  var modal = document.getElementById('loginModal');
+Body { 
+onLogin(): any {
+    var emailInput = (<HTMLInputElement>document.getElementById('emailInput')).value.trim();
+    var passInput = (<HTMLInputElement>document.getElementById('passInput')).value.trim();
+    var emailFormat = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+  
+    if(!emailInput.match(emailFormat)){
+        alert("Please enter a valid email!");
+    }
 
-// Get the button that opens the modal
+    if(passInput ==''){
+      alert("Password field can not be empty!");
+    }
+     
 
-var btn = document.getElementById("loginBtn");
+    for (let i = 0; i < this.Student.length; i++) {
 
-// Get the <span> element that closes the modal
+      if (emailInput == this.Student[i].email) {
+        console.log('email success');
+        if (passInput == this.Student[i].password) {
+          console.log('pasword success');
+          //get the id
+          console.log(this.Student[i]._id);
+          this.studentId = this.Student[i]._id;
+          localStorage.setItem("studentId", this.Student[i]._id);
+          
+          this.ngZone.run(() => this.router.navigateByUrl('/course-list'))
+        } else if (emailInput == this.Student[i].email && passInput !== this.Student[i].password){
+          alert('Password is incorrect for this email!');
+          console.log('password fail');
+        }
+      } else if (emailInput !== this.Student[i].email && passInput == this.Student[i].password) {
+        alert("Email is incorrect for this password!");
+        console.log('email fail');
+      }
+      else if (emailInput !== this.Student[i].email && passInput !== this.Student[i].password) {
+        alert("Both password and email are incorrect!");
+      }
+      else{
+        console.log("successful login");
+      }
+    }
+  }
 
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-
-btn.onclick = function() {
-
-modal.style.display = "block";
-
-}
-
-// When the user clicks on <span> (x), close the modal
-
-span.onclick = function() {
-
-modal.style.display = "none";
-
-}
-
-function promptPassword( )
-
-{
-
-while (document.getElementById("pwdText").value != 'P@ssw0rd'){
-
-alert("Login is incorrect");
-
-document.getElementById('pwdText').value = "";
-
-}
-
-alert("Password is correct, you are allowed to enter the site");
-
-}
 
   font-family: Calibri, Helvetica, sans-serif;  
 
