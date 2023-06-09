@@ -10,11 +10,43 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function() {
+function getResults() {
 
-        alert("I am an alert box!");
+    var radios = document.getElementsByTagName("input");
 
-    });
+    var values = new Array();
+
+    for (var i = 0; i < radios.length; i++) {       
+
+        if (radios[i].checked) {
+
+            var found = false; //Represents if we have a duplicate
+
+            for(var j = 0; j < values.length; j++) { //Loop through previous items
+
+                if(values[j] == radios[i].value) { //Duplicate?
+
+                    found = true; // Flag it
+
+                    break; //Exit 'j' loop
+
+                }
+
+            }
+
+            values[values.length] = radios[i].value; //Add value to previous items
+
+            if(!found) continue; //If there was no duplicate, continue to next item
+
+            alert(radios[i].value); //There was a duplicate, alert and return
+
+            break;
+
+        }
+
+    }
+
+}
 
 </script>
 
