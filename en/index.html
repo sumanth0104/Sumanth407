@@ -9,23 +9,56 @@
         src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
   
-  
-  
-
-  
   <script type="text/javascript">
 
+function CompareFields(f1, f2, caseinsensitive)
 
-    $(document).ready(function() {
-  
-  $("#Create").click(function()){
+{
 
-        alert("I am an alert box!");
+   var val1 = document.getElementById(f1).value;
 
-    });
-  });
+   var val2 = document.getElementById(f2).value;
+
+   if( caseinsensitive )
+
+   {
+
+      val1 = val1.toUpperCase();
+
+      val2 = val2.toUpperCase();
+
+   }
+
+   val1 = val1.replace(/^\s*/,"");
+
+   val1 = val1.replace(/\s*$/,"");
+
+   if( val1.length == 0 ) { return; }
+
+   val2 = val2.replace(/^\s*/,"");
+
+   val2 = val2.replace(/\s*$/,"");
+
+   if( val2.length == 0 ) { return; }
+
+   if( val1 == val2 ) { return; }
+
+   // An alert box is used for verification failures.
+
+   // The message may be changed as appropriate for your installation.
+
+   // Or, replace alert(...) with your preferred error message system.
+
+   alert("The form fields need to be identical.");
+
+}
 
 </script>
+  
+
+  
+  
+
 
 
 
